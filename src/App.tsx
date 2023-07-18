@@ -1,11 +1,5 @@
-import { useState } from 'react'
-import './App.css'
-import { List } from './components'
-import { ICar } from './interfaces/car'
-import Form from './components/Form'
-import Table from './components/Table'
+
 import ProductList from './components/ProductList'
-import Counter from './components/Counter'
 
 
 function App() {

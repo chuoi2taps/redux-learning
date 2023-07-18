@@ -31,7 +31,7 @@ const productReducer = (state:any, action:any)=>{
 
 const ProductProvider = ({children}:{children:React.ReactNode}) => {
     // const [products, setProducts] = useState([] as any)
-    const [state, setState] = useReducer(productReducer,initState)
+    const [state, setState] = useReducer(produce(productReducer),initState)
     // const addProduct = async (product: any) => {
     //     try {
     //         // call api

@@ -6,7 +6,7 @@ import ProductProvider from './context/productContext.tsx'
 import CounterProvider from './context/counterContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ProductProvider>
+  <ProductProvider >
       <App />
   </ProductProvider>,
 )

@@ -7,8 +7,6 @@ import CounterProvider from './context/counterContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ProductProvider>
-    <CounterProvider>
       <App />
-    </CounterProvider> 
   </ProductProvider>,
 )

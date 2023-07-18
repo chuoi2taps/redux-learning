@@ -53,7 +53,6 @@ function App() {
         <Table dataSource={carsData} columns={columns} />
       </div> */}
     <div className='w-96 mx-auto border border-gray-500 p-2'>
-      <ProductList/>
       <Counter/>
     </div>
 

@@ -1,32 +1,27 @@
-import {legacy_createStore as createStore, combineReducers} from 'redux'
-import {produce} from 'immer'
-const counterReducer = (state={count:0}, action:any)=>{
-    switch(action.type){
-        case "INCREMENT":
-            return {count: state.count + 1}
-        case "DECREMENT":
-            return {count: state.count - 1}
-        case "INCREASE":
-            return {count: state.count + action.payload}
-        default:
-            return state
-    }
-}
-const productReducer = (state={products:[]}, action:any)=>{
-    switch(action.type){
-        case "FETCH_PRODUCTS":
-            state.products = action.payload
-            return;
-        default:
-            return state;
-    }
-}
+import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { counterReducer } from '../reducers/Counter'
+import { productReducer } from '../reducers/Product'
+import thunk from 'redux-thunk'
+import { cartReducer } from '../reducers/Cart';
+
+const composeEnhancers =
+    typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+            // Specify extension’s options like name, actionsDenylist, actionsCreators, serialize...
+        })
+        : compose;
+
+const enhancer = composeEnhancers(
+    applyMiddleware(thunk),
+    // other store enhancers if any
+);
 
 const rootReducer = combineReducers({
     counter: counterReducer,
-    products: productReducer
+    products: productReducer,
+    carts: cartReducer
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, enhancer)
 
 export default store

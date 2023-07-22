@@ -6,6 +6,7 @@ import Form from './components/Form'
 import Table from './components/Table'
 import ProductList from './components/ProductList'
 import Counter from './components/Counter'
+import Cart from './components/Cart'
 
 // const carsData = [
 //   { id: 1, name: "BMW", price: 1000 },
@@ -54,6 +55,10 @@ function App() {
       </div> */}
     <div className='w-96 mx-auto border border-gray-500 p-2'>
       <Counter/>
+      <ProductList/>
+      <hr />
+      <br />
+      <Cart/>
     </div>
 
 

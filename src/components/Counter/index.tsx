@@ -1,19 +1,17 @@
-import React, { useContext } from 'react'
-import { CounterContext } from '../../context/counterContext'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { increment, decrement, increase, decrease } from "../../slices/Counter";
 const Counter = () => {
-    const dispatch = useDispatch()
-    const state = useSelector((state:any)=>state.counter.count)
+    const dispatch = useAppDispatch();
+    const count = useAppSelector((state:any) => state.counter.count);
 
     return (
         <div className='py-4'>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={()=>dispatch({type:"INCREMENT"})}>Increase</button>
-            <span className="px-5">{state}</span>
-            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch({type:"DECREMENT"})}>Decrease</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={()=>dispatch(increment())}>Increase</button>
+            <span className="px-5">{count}</span>
+            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch(decrement())}>Decrease</button>
             <br />
-            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch({type:"INCREASE", payload:100})}> + 100</button>
-            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch({type:"DECREASE", payload:100})}> - 100</button>
+            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch(increase(10))}> + 100</button>
+            <button className=" bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => dispatch(decrease(10))}> - 100</button>
         </div>
     )
 }

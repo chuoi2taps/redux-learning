@@ -58,7 +58,7 @@ function App() {
       <ProductList/>
       <hr />
       <br />
-      <Cart/>
+      
     </div>
 
 

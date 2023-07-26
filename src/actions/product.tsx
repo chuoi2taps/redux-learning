@@ -5,6 +5,7 @@ export const getProducts = createAsyncThunk(
     "product/getProducts",
     async () => {
         try{
+            await pause(2000);
             const {data} = await axios.get(`http://localhost:3000/products`)
             return data;
         }
@@ -21,7 +22,7 @@ export const addProduct = createAsyncThunk(
             return data;
         }
         catch(error:any){
-            return error.message
+            return error.message;
         }
     }
 )
@@ -33,7 +34,7 @@ export const deleteProduct = createAsyncThunk(
             return id;
         }
         catch(error:any){
-            return error.message
+            return error.message;
         }
     }
 )
@@ -45,7 +46,7 @@ export const updateProduct = createAsyncThunk(
             return data;
         }
         catch(error:any){
-            return error.message
+            return error.message;
         }
     }
 )

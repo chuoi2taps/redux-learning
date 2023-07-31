@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { addProduct, deleteProduct, getProducts, updateProduct } from "../../actions/product";
-
+import { add } from "../../slices/Cart";
 
 
 const ProductList = () => {
@@ -16,9 +16,9 @@ const ProductList = () => {
     return (
         <div>
             {products?.map((item:any)=><div key={item.id}>{item.name}
-            {/* <button className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded" onClick={() =>dispatch({ type: "cart/add", payload: { ...item, quantity: 1 } })}>
+            <button className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded" onClick={() =>dispatch(add({...item, quantity: 1}))}>
                         Add to cart
-            </button> */}
+            </button>
             </div>)
             }
             <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={()=>dispatch(addProduct({name:"product C"}))}>Add</button>

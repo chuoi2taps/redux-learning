@@ -29,17 +29,35 @@ const productSlice = createSlice({
             state.isLoading = false
             state.error = action.payload
         })
+        //Adding
+        builder.addCase(addProduct.pending, (state: any) => {
+            state.isLoading = true
+        })
         builder.addCase(addProduct.fulfilled, (state: any, action) => {
             state.isLoading = false
             state.products.push(action.payload);
         })
+        builder.addCase(addProduct.rejected, (state: any, action) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+        //Updating
         builder.addCase(updateProduct.fulfilled, (state: any, action) => {
             const product = action.payload
             state.products = state.products.map((item: any) => item.id === product.id ? product : item)
         })
+        builder.addCase(updateProduct.rejected, (state: any, action) => {
+            state.isLoading = false
+            state.error = action.payload    
+        })
+        //Deleting
         builder.addCase(deleteProduct.fulfilled, (state: any, action) => {
             const id = action.payload
             state.products = state.products.filter((item: any) => item.id !== id)
+        })
+        builder.addCase(deleteProduct.rejected, (state: any, action) => {
+            state.isLoading = false
+            state.error = action.payload
         })
     }
 });

@@ -1,33 +1,31 @@
-import React from 'react'
+import React from "react";
 
 type ButtonProps = {
     type?: "primary" | "danger";
-    shape?: "round" | "circle" |"default";
-    icon?: React.ReactNode;
     loading?: boolean;
-    children?: React.ReactNode;
+    shape?: "round" | "circle" | "default";
     onClick?: () => void;
-}
+    icon?: React.ReactNode;
+    children?: React.ReactNode;
+    className?: string;
+};
 
-const Button = ({loading, children,type,shape, icon, onClick}:ButtonProps) => {
-  return (
-    <div>{loading? "Loading...":""}
-    <button
-      className={`border border-gray-500 py-2 px-3
-      ${type ==='primary' && 'text-white bg-blue-500'}
-      ${type ==='danger' && 'text-white bg-red-500'}
-      ${shape ==='round' && 'rounded-full'}
-      ${shape ==='circle' && 'rounded-full w-10 h-10 text-center'}
-      ${shape ==='default' && 'rounded-md'}
-
-    
+const Button = ({ icon, type, shape, children, className, onClick }: ButtonProps) => {
+    return (
+        <button
+            className={`border border-gray-500 py-2 px-4 ${className}
+            ${type === "primary" && "text-white bg-blue-500"}
+            ${type === "danger" && "text-white bg-red-500"}
+            ${shape === "round" && "rounded-full"}
+            ${shape === "circle" && "rounded-full w-10 h-10"}
+            ${shape === "default" && "rounded-md"}
     `}
-    onClick={onClick}>
-      {icon&&icon}
-      {children}
-      </button>
-    </div>
-  )
-}
+            onClick={onClick}
+        >
+            {icon && icon}
+            {children}
+        </button>
+    );
+};
 
-export default Button
+export default Button;

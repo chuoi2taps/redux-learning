@@ -1,6 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { addProduct, deleteProduct, getProducts, updateProduct } from '../actions/product';
+import { addProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from '../actions/product';
 
 const initialState = {
     products: [],
@@ -28,6 +28,11 @@ const productSlice = createSlice({
         builder.addCase(getProducts.rejected, (state: any, action) => {
             state.isLoading = false
             state.error = action.payload
+        })
+        builder.addCase(getOneProduct.fulfilled, (state: any, action) => {
+            state.isLoading = false
+            const id = action.payload
+            state.products = state.products.map((item: any) => item.id === id)
         })
         //Adding
         builder.addCase(addProduct.pending, (state: any) => {

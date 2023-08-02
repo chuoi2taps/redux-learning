@@ -1,7 +1,5 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit"
-import { counterReducer } from '../slices/Counter';
 import { productReducer } from '../slices/Product';
-import { cartReducer } from "../slices/Cart";
 import {
     persistStore,
     persistReducer,
@@ -21,9 +19,7 @@ const persistConfig = {
     blacklist: ['products', 'counter']
 }
 const rootReducer = combineReducers({
-    counter: counterReducer,
     products: productReducer,
-    cart: cartReducer
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

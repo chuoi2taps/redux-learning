@@ -14,11 +14,22 @@ export const getProducts = createAsyncThunk(
         }
     }
 )
+export const getOneProduct = createAsyncThunk(
+    "product/getOneProduct",
+    async (id:any) => {
+        try{
+            const {data} = await axios.get(`http://localhost:3000/products/${id}`)
+            return data;
+        }
+        catch(error:any){
+            return error.message
+        }
+    }
+)
 export const addProduct = createAsyncThunk(
     "product/addProduct",
     async (product:any) => {
         try{
-            await pause(1000);
             const {data} = await axios.post(`http://localhost:3000/products`, product)
             return data;
         }
@@ -51,15 +62,3 @@ export const updateProduct = createAsyncThunk(
         }
     }
 )
-// export const addProduct = (product: any) => async (dispatch: any) => {
-//     const {data} = await axios.post(`http://localhost:3000/products`, product)
-//     dispatch({ type: "products/addProduct", payload: data })
-// }
-// export const deleteProduct = (id: any) => async (dispatch: any) => {
-//     await axios.delete(`http://localhost:3000/products/${id}`)
-//     dispatch({ type: "products/deleteProduct", payload: id })
-// }
-// export const updateProduct = (product: any) => async (dispatch: any) => {
-//     const {data} = await axios.put(`http://localhost:3000/products/${product.id}`,product)
-//     dispatch({ type: "products/updateProduct", payload: data })
-//}

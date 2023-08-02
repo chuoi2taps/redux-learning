@@ -1,14 +1,18 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
-import Cart from "../components/Cart";
+import ProductList from "../components/ProductList";
+import ProductAdd from "../components/ProductAdd";
+import { addProduct } from "../actions/product";
+import List from "../pages/List";
 
 export const router = createBrowserRouter([
     { path: "/", element: <div>Home Page</div> },
-    {path:'/cart', element: <Cart/> },
+    { path: "/products", element: <List/> },
+    { path: "/products/:id", element: <div>Detail Page</div> },
     {
         path: "/admin",
         element: (
             <div>
-                Layout Admin <Outlet />
+                This is Layout Admin <Outlet />
             </div>
         ),
         children: [
@@ -21,12 +25,16 @@ export const router = createBrowserRouter([
                 element: <div>Dashboard</div>,
             },
             {
-                path: "product",
-                element: <div>Product List</div>,
+                path: "products",
+                element: <ProductList/>,
             },
             {
-                path: "product/:id",
+                path: "products/:id/update",
                 element: <div>Product Detail</div>,
+            },
+            {
+                path: "products/add",
+                element: <ProductAdd />,
             },
         ],
     },

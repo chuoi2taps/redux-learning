@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Input } from '..'
+import  Button from '../../components/Button'
 import { AiOutlinePlus } from "react-icons/ai";
-import { ICar } from '../../interfaces/car';
+import { IProduct } from '../../interfaces/product';
+import Input from '../Input';
 
 type FormProps = {
-  onAdd:(car:ICar)=>void
+  onAdd:(product:IProduct)=>void
 
 }
 
@@ -23,8 +24,7 @@ const Form = ({onAdd}: FormProps) => {
     if(!inputValue) return alert('Hãy viết vào form')
     onAdd({
       ...inputValue,
-      id:Math.floor(Math.random()*1000)
-    } as ICar);
+    } as IProduct);
     setInputValue('')
     const form = e.target as HTMLFormElement;
     form.reset()
@@ -32,8 +32,8 @@ const Form = ({onAdd}: FormProps) => {
   
   return (
     <form onSubmit={onHandleSubmit} className='flex justify-between items-center p-2 border border-red-500'>
-        <Input onChange={onHandleChange} placeholder='Car Name' size='small' name='name'/>
-        <Input onChange={onHandleChange} placeholder='Car Price' size='small' name='price'/>
+        <Input onChange={onHandleChange} placeholder='Name' size='small' name='name'/>
+        <Input onChange={onHandleChange} placeholder='Price' size='small' name='price'/>
         <Button type='primary' shape='default' icon={<AiOutlinePlus className='text-2xl'/>} />
         {JSON.stringify(inputValue)}
     </form>

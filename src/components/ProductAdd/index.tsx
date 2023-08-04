@@ -44,12 +44,19 @@ const ProductAdd = () => {
           rules={[
             { required: true, message: "Input your product name !" },
             { min: 3, message: "At least 3 letters" },
+            { whitespace: true, message: "No whitespace !" },
           ]}
         >
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType> label="Price" name="price">
+        <Form.Item<FieldType> 
+        label="Price"
+        name="price" 
+        rules={[
+          { required: true, message: "Input your product price !"},
+          { whitespace: true, message: "No whitespace !" },
+        ]}>
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

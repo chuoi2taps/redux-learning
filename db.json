@@ -1,9 +1,9 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "product A",
-      "price": 100
+      "name": "product A updated",
+      "price": 100,
+      "id": 1
     },
     {
       "id": 2,
@@ -11,9 +11,19 @@
       "price": 200
     },
     {
-      "name": "Product C",
       "id": 3,
-      "price": 300
+      "name": "product C",
+      "price": 200
+    },
+    {
+      "name": "được lắm",
+      "price": "123",
+      "id": 4
+    },
+    {
+      "name": "adu vip vl anh ơiiiii",
+      "price": "123",
+      "id": 5
     }
   ]
 }

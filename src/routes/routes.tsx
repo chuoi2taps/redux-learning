@@ -3,18 +3,23 @@ import ProductList from "../components/ProductList";
 import ProductAdd from "../components/ProductAdd";
 import { addProduct } from "../actions/product";
 import List from "../pages/List";
+import AdminLayout from "../pages/Layouts/AdminLayout";
+import WebsiteLayout from "../pages/Layouts/WebappLayout";
+import ProductEdit from "../components/ProductEdit";
+import Detail from "../pages/Detail";
 
 export const router = createBrowserRouter([
-    { path: "/", element: <div>Home Page</div> },
-    { path: "/products", element: <List/> },
-    { path: "/products/:id", element: <div>Detail Page</div> },
+    { path: "/", 
+    element: <WebsiteLayout/>,
+    children:[
+        { index:true, element: <div>Home Page</div> },
+        { path: "/products", element: <List/> },
+        { path: "/products/:id", element: <Detail/> },
+    ]},
+    
     {
         path: "/admin",
-        element: (
-            <div>
-                This is Layout Admin <Outlet />
-            </div>
-        ),
+        element: <AdminLayout/>,
         children: [
             {
                 index: true,
@@ -29,8 +34,8 @@ export const router = createBrowserRouter([
                 element: <ProductList/>,
             },
             {
-                path: "products/:id/update",
-                element: <div>Product Detail</div>,
+                path: "products/:id/edit",
+                element: <ProductEdit />,
             },
             {
                 path: "products/add",

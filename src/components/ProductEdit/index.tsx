@@ -1,36 +1,48 @@
-import { useAddProductMutation } from "../../api/product";
+import { useAddProductMutation, useGetProductByIdQuery, useUpdateProductMutation } from "../../api/product";
 import { IProduct } from "../../interfaces/product";
-import { Form, Button, Input,Spin,message } from "antd";
+import { Form, Button, Input, Spin, message } from "antd";
+import { useEffect } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 type FieldType = {
   name: string;
   price: number;
 };
-const ProductAdd = () => {
+const ProductEdit = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = () => {
     messageApi.open({
       type: 'success',
-      content: 'Add product successfully',
+      content: 'Update product successfully',
     });
   };
+  const { id } = useParams<{ id: string }>();
+  const { data: productData, isLoading } = useGetProductByIdQuery(id || "");
 
-  const [addProduct, { isLoading }] = useAddProductMutation();
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue({
+      name: productData?.name,
+      price: productData?.price,
+    });
+  }, [productData]);
+
+  const [updateProduct] = useUpdateProductMutation();
   const navigate = useNavigate();
   const onFinish = (values: IProduct) => {
-    addProduct(values)
+    updateProduct({ ...values, id: id })
       .unwrap()
       .then(() => navigate("/admin/products"));
   };
   return (
     <div>
       <header className="mb-4">
-        <h2 className="font-bold text-2xl">Add Product</h2>
+        <h2 className="font-bold text-2xl">Edit Product : {productData?.name}</h2>
       </header>
       {contextHolder}
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -43,7 +55,7 @@ const ProductAdd = () => {
           name="name"
           rules={[
             { required: true, message: "Input your product name !" },
-            { min: 3, message: "At least 3 letters" },
+            { min: 3, message: "At least 3 letters " },
           ]}
         >
           <Input />
@@ -55,9 +67,9 @@ const ProductAdd = () => {
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit" className="mx-2 bg-yellow-500 hover:bg-yellow-700 text-white rounded text-center" onClick={() => success()}>
             {isLoading ? (
-              <AiOutlineLoading3Quarters className = "animate-spin" />
+              <Spin />
             ) : (
-              "Add new product"
+              "Update"
             )}
           </Button>
           <Button
@@ -73,4 +85,4 @@ const ProductAdd = () => {
   );
 };
 
-export default ProductAdd;
+export default ProductEdit;

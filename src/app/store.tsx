@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit"
-import { productReducer } from '../slices/Product';
+import { productReducer } from '../api/product';
 import {
     persistStore,
     persistReducer,
@@ -11,15 +11,16 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import productApi from "../api/product";
 
 // Cấu hình persist ( lưu localStorage )
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['products', 'counter']
+    blacklist: ['products']
 }
 const rootReducer = combineReducers({
-    products: productReducer,
+    [productApi.reducerPath] : productReducer
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -30,7 +31,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }),
+        }).concat(productApi.middleware),
 })
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>

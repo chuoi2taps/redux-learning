@@ -48,8 +48,8 @@ const WebsiteLayout = () => {
         />
         
       </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <div style={{ margin: '16px 0' }}>
+      <Content className='py-[50px]'>
+        <div className='mx-8'>
 
         </div>
         <div className="site-layout-content" >

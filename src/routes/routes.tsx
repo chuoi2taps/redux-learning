@@ -1,7 +1,6 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import ProductList from "../components/ProductList";
 import ProductAdd from "../components/ProductAdd";
-import { addProduct } from "../actions/product";
 import List from "../pages/List";
 import AdminLayout from "../pages/Layouts/AdminLayout";
 import WebsiteLayout from "../pages/Layouts/WebappLayout";

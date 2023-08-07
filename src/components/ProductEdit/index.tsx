@@ -28,6 +28,17 @@ const ProductEdit = () => {
     });
   }, [productData]);
 
+  const validateInput = (_:any, value:number) => {
+    if (value < 0) {
+      return Promise.reject(new Error("Price cannot be negative"));
+    }
+    if (!value || isNaN(value)) {
+      return Promise.reject(new Error("Please enter a valid number"));
+    }
+    return Promise.resolve();
+  
+  };
+
   const [updateProduct] = useUpdateProductMutation();
   const navigate = useNavigate();
   const onFinish = (values: IProduct) => {
@@ -55,7 +66,7 @@ const ProductEdit = () => {
           name="name"
           rules={[
             { required: true, message: "Input your product name !" },
-            { min: 3, message: "At least 3 letters " },
+            { min: 5, message: "At least 5 letters " },
             { whitespace: true, message: "No whitespace !" },
           ]}
         >
@@ -68,6 +79,7 @@ const ProductEdit = () => {
         rules={[
           { required: true, message: "Input your product price !"},
           { whitespace: true, message: "No whitespace !" },
+          { validator: validateInput}
         ]}
          >
           <Input />
@@ -85,7 +97,7 @@ const ProductEdit = () => {
             className="mx-2 bg-gray-500 hover:bg-gray-700 text-white rounded text-center"
             onClick={() => navigate("/admin/products")}
           >
-            Return to Admin
+            Cancel
           </Button>
         </Form.Item>
       </Form>

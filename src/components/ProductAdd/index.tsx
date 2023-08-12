@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 type FieldType = {
   name: string;
   price: number;
+  description: string
 };
 const ProductAdd = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -69,6 +70,17 @@ const ProductAdd = () => {
           { whitespace: true, message: "No whitespace !" },
           { validator: validateInput}
         ]}>
+          <Input />
+        </Form.Item>
+        <Form.Item<FieldType>
+          label="Product Description"
+          name="description"
+          rules={[
+            { required: true, message: "Input your product description !" },
+            { min: 5, message: "At least 5 letters" },
+            { whitespace: true, message: "No whitespace !" },
+          ]}
+        >
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

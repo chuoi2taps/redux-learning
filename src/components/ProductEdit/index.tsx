@@ -1,12 +1,12 @@
-import { useAddProductMutation, useGetProductByIdQuery, useUpdateProductMutation } from "../../api/product";
+import { useGetProductByIdQuery, useUpdateProductMutation } from "../../api/product";
 import { IProduct } from "../../interfaces/product";
 import { Form, Button, Input, Spin, message } from "antd";
 import { useEffect } from "react";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 type FieldType = {
   name: string;
   price: number;
+  description: string
 };
 const ProductEdit = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,6 +25,7 @@ const ProductEdit = () => {
     form.setFieldsValue({
       name: productData?.name,
       price: productData?.price,
+      description: productData?.description,
     });
   }, [productData]);
 
@@ -82,6 +83,17 @@ const ProductEdit = () => {
           { validator: validateInput}
         ]}
          >
+          <Input />
+        </Form.Item>
+        <Form.Item<FieldType>
+          label="Product Description"
+          name="description"
+          rules={[
+            { required: true, message: "Input your product description !" },
+            { min: 5, message: "At least 5 letters" },
+            { whitespace: true, message: "No whitespace !" },
+          ]}
+        >
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

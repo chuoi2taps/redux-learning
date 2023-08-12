@@ -8,10 +8,11 @@ const ProductList = () => {
   const confirm = (id: number) => {
     removeProduct(id)
   }
-  const dataSource = productData?.map(({ id, name, price }: IProduct) => ({
+  const dataSource = productData?.map(({ id, name, price, description}: IProduct) => ({
     key: id,
     name,
     price,
+    description,
   }));
   const columns = [
     {
@@ -27,6 +28,11 @@ const ProductList = () => {
       title: "Product Price",
       dataIndex: "price",
       key: "price",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description"
     },
     {
       title: "Action",
@@ -64,8 +70,8 @@ const ProductList = () => {
           </Link>
         </Button>
       </header>
-      {isRemovingSuccess && <Alert message="Delete success" type="success" />}
-      {isLoading ? <Skeleton active /> : <Table dataSource={dataSource} columns={columns} />}
+      {isRemovingSuccess && <Alert message={"Delete product successfully"} type="success" />}
+      {isLoading ? <Skeleton active /> : <Table dataSource={dataSource} columns={columns} pagination={{ pageSize: 3, showQuickJumper: true }}/>}
     </div>
   )
 }

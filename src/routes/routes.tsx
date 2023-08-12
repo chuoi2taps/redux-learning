@@ -6,12 +6,13 @@ import AdminLayout from "../pages/Layouts/AdminLayout";
 import WebsiteLayout from "../pages/Layouts/WebappLayout";
 import ProductEdit from "../components/ProductEdit";
 import Detail from "../pages/Detail";
+import Home from "../pages/Home";
 
 export const router = createBrowserRouter([
     { path: "/", 
     element: <WebsiteLayout/>,
     children:[
-        { index:true, element: <div>Home Page</div> },
+        { index:true, element: <Home/> },
         { path: "/products", element: <List/> },
         { path: "/products/:id", element: <Detail/> },
     ]},
